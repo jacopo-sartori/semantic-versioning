@@ -53,6 +53,7 @@ def _from_dict(version):
     return filtered
 
 
+@functools.total_ordering
 class Version:
     def __init__(self, version=None):
         for attr, value in _parse(version).items():
@@ -94,20 +95,8 @@ class Version:
     def __lt__(self, other):
         return self._compare(other) == -1
 
-    def __le__(self, other):
-        return self._compare(other) != 1
-
-    def __gt__(self, other):
-        return self._compare(other) == 1
-
-    def __ge__(self, other):
-        return self._compare(other) != -1
-
     def __eq__(self, other):
         return self._compare(other) == 0
-
-    def __ne__(self, other):
-        return self._compare(other) != 0
 
     def bump_major(self):
         return self.__class__({"major": self.major + 1, "minor": 0, "patch": 0})
