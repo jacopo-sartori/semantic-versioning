@@ -144,7 +144,7 @@ def test_version_bump():
         ("0.1", [], 0),
         ("3.3.7", (3, 3, 9), -1),
         ("2", {"patch": 9}, 1),
-    ]
+    ],
 )
 def test_compare(version_a, version_b, expected):
     assert semanticversioning.compare(version_a, version_b) == expected

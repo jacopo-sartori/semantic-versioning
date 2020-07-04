@@ -1,0 +1,35 @@
+name: CI pipeline
+on: [push]
+
+jobs:
+    black_check:
+        name: Black check
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v1
+          - name: Set up Python 3.8
+            uses: actions/setup-python@v1
+            with:
+                python-version: 3.8
+
+          - name: Install dependencies
+            run: pip install --upgrade black
+
+          - name: Run black check
+            run: black --check .
+
+    unit_tests:
+        name: Unit tests
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v1
+          - name: Set up Python 3.8
+            uses: actions/setup-python@v1
+            with:
+                python-version: 3.8
+
+          - name: Install dependencies
+            run: pip install --upgrade pytest
+
+          - name: Run unit tests
+            run: pytest
